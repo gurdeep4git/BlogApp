@@ -1,26 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <Fragment>
+        <header>
+          <div>logo</div>
+          <nav></nav>
         </header>
-      </div>
+        <Grid container spacing={24}>
+          <Grid item xs={3}>
+            <Button variant="contained" color="primary" fullWidth>
+              Primary
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button variant="contained" color="primary" fullWidth>
+              Primary
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button variant="contained" color="primary" fullWidth>
+              Primary
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button variant="contained" color="primary" fullWidth>
+              Primary
+            </Button>
+          </Grid>
+        </Grid>
+      </Fragment>
     );
   }
 }
