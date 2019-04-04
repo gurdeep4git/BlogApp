@@ -1,52 +1,48 @@
 import React, { Component, Fragment } from "react";
-import Users from "../../components/Users/Users";
-import Todos from "../Todos/Todos";
 import axios from "axios";
-
+import Todo from '../../components/Todo/Todo';
 import Grid from "@material-ui/core/Grid";
 
-class Cockpit extends Component {
-    url = "https://jsonplaceholder.typicode.com/users";
-    users = new Map();
+class Todos extends Component {
+    
+    url = "https://jsonplaceholder.typicode.com/todos";
+    todos = new Map();
 
-    state = {
-        users: null
-    };
-
+    state = { 
+        todos : null
+     }
+    
     componentDidMount() {
         axios
             .get(this.url)
             .then(response => {
                 response.data.forEach((element, i) => {
-                    this.users.set(i + 1, element);
+                    this.todos.set(i + 1, element);
                 });
-                this.setState({ users: this.users });
+                this.setState({ todos: this.todos });
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
-    render() {
-        let users = "Loading...";
-        if (this.state.users) {
-            users = <Users usersList={this.state.users} />;
+    render() { 
+
+        let todos = "Loading...";
+        if (this.state.todos) {
+            todos = <Todo todosList={this.state.todos} />;
         }
 
-        return (
+        return ( 
             <Fragment>
                 <div style={{ flexGrow: 1 }}>
                     <Grid container spacing={24}>
-                        {users}
+                        {todos}
                     </Grid>
                 </div>
-
-                <hr/>
-                <Todos />
-
             </Fragment>
         );
     }
 }
-
-export default Cockpit;
+ 
+export default Todos;
