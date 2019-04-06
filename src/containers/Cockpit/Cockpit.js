@@ -1,50 +1,26 @@
-import React, { Component, Fragment } from "react";
-import Users from "../../components/Users/Users";
-import Todos from "../Todos/Todos";
-import axios from "axios";
 
-import Grid from "@material-ui/core/Grid";
+import Header from "../../components/Header/Header";
+import Users from "../Users/Users";
+import Todos from "../Todos/Todos";
+
+
+import React, { Component, Fragment } from "react";
+import { Route } from 'react-router';
+import { Switch } from 'react-router-dom';
 
 class Cockpit extends Component {
-    url = "https://jsonplaceholder.typicode.com/users";
-    users = new Map();
-
-    state = {
-        users: null
-    };
-
-    componentDidMount() {
-        axios
-            .get(this.url)
-            .then(response => {
-                response.data.forEach((element, i) => {
-                    this.users.set(i + 1, element);
-                });
-                this.setState({ users: this.users });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
+    
     render() {
-        let users = "Loading...";
-        if (this.state.users) {
-            users = <Users usersList={this.state.users} />;
-        }
-
         return (
             <Fragment>
-                <div style={{ flexGrow: 1 }}>
-                    <Grid container spacing={24}>
-                        {users}
-                    </Grid>
-                </div>
-
-                <hr/>
-                <Todos />
-
-            </Fragment>
+            <Header />
+             <Switch>
+                <Route path="/" component={Users} exact />
+                <Route path="/users" component={Users} exact />
+                <Route path="/todos" component={Todos} />
+                <Route path="/:id" component="<h1>Hi</h1>" />
+            </Switch>
+        </Fragment>
         );
     }
 }

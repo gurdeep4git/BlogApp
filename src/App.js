@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import Layout from '../src/components/Layout/Layout';
+import Cockpit from '../src/containers/Cockpit/Cockpit';
+import {BrowserRouter} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <Layout />
-      </Fragment>
+      <BrowserRouter>
+        <Fragment>
+          <Cockpit />
+        </Fragment>
+      </BrowserRouter>
     );
   }
 }
