@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Todo from '../../components/Todo/Todo';
+import UserDropdown from '../../components/UsersDropdown/UsersDropdown';
 import Grid from "@material-ui/core/Grid";
 
 class Todos extends Component {
@@ -36,6 +37,7 @@ class Todos extends Component {
         return ( 
             <Fragment>
                 <div style={{ flexGrow: 1 }}>
+                    <UserDropdown />
                     <Grid container spacing={24}>
                         {todos}
                     </Grid>

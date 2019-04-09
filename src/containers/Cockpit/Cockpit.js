@@ -18,7 +18,7 @@ class Cockpit extends Component {
                 <Route path="/" component={Users} exact />
                 <Route path="/users" component={Users} exact />
                 <Route path="/todos" component={Todos} />
-                <Route path="/:id" component="<h1>Hi</h1>" />
+                {/* <Route path="/:id" component="<h1>Hi</h1>" /> */}
             </Switch>
         </Fragment>
         );
