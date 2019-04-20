@@ -1,50 +1,57 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import Todo from '../../components/Todo/Todo';
-import UserDropdown from '../../components/UsersDropdown/UsersDropdown';
+import Todo from "../../components/Todo/Todo";
+import UserDropdown from "../../components/UsersDropdown/UsersDropdown";
 import Grid from "@material-ui/core/Grid";
 
 class Todos extends Component {
-    
-    url = "https://jsonplaceholder.typicode.com/todos";
     todos = new Map();
 
-    state = { 
-        todos : null
-    }
-    
-    componentDidMount() {
+    state = {
+        todosBySelectedUser: null
+    };
+
+    changeHandler = event => {
+        const selectedItem = event.target.value;
+        console.log(selectedItem);
+        this.getTodosById(selectedItem);
+    };
+
+    getTodosById = id => {
         axios
-            .get(this.url)
+            .get(`https://jsonplaceholder.typicode.com/todos?userId=${id}`)
             .then(response => {
                 response.data.forEach((element, i) => {
                     this.todos.set(i + 1, element);
                 });
-                this.setState({ todos: this.todos });
+                this.setState({ todosBySelectedUser: this.todos });
             })
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
 
-    render() { 
+    render() {
+        // let todos = "Loading...";
+        // if (this.state.todosBySelectedUser) {
+        //     todos = <Todo todosList={this.state.todosBySelectedUser} />;
+        // }
 
-        let todos = "Loading...";
-        if (this.state.todos) {
-            todos = <Todo todosList={this.state.todos} />;
-        }
-
-        return ( 
+        return (
             <Fragment>
                 <div style={{ flexGrow: 1 }}>
-                    <UserDropdown />
+                    <UserDropdown onchangeEvent={this.changeHandler} />
                     <Grid container spacing={24}>
-                        {todos}
+                        {this.state.todosBySelectedUser ? (
+                            <Todo todosList={this.state.todosBySelectedUser} />
+                        ) : (
+                            <p>Select a user to get todos.</p>
+                        )}
                     </Grid>
                 </div>
             </Fragment>
         );
     }
 }
- 
+
 export default Todos;
